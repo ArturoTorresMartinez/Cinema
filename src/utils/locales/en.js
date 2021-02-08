@@ -9,4 +9,6 @@ export default {
   top_rated: 'Top Rated',
   close: 'Close',
   sort: 'Sort',
+  could_not_fetch:"Couldn't fetch movies",
+  try_later:"Check your connectivity and try again later."
 };

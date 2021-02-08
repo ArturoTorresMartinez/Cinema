@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {View, FlatList, Animated, Text, ActivityIndicator} from 'react-native';
+import {View, FlatList, Alert, Text, ActivityIndicator} from 'react-native';
 import I18n from '../../utils/i18n';
 import themedStyles from './styles';
 import {useTheme} from 'react-native-themed-styles';
@@ -24,7 +24,20 @@ const MovieDetails = (props) => {
       .then((res) => {
         setMovie(res.data);
       })
-      .catch((err) => console.log('err'))
+      .catch((err) => {
+        console.log('err2', err)
+        Alert.alert(
+          I18n.t("could_not_fetch"),
+          I18n.t("try_later"),
+          [
+            {
+              text: 'Okay',
+              style: 'cancel'
+            }
+          ],
+          {cancelable: false}
+        );
+    })
       .finally(() => {
         setIsLoading(false);
       });

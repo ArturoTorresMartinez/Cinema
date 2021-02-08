@@ -1,12 +1,11 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {View, FlatList, Animated, Text} from 'react-native';
+import React, {useState, useEffect, useRef, useLayoutEffect} from 'react';
+import {View, FlatList, Alert, Text, TouchableOpacity} from 'react-native';
 import I18n from '../../utils/i18n';
 import themedStyles from './styles';
 import {useTheme} from 'react-native-themed-styles';
 import moviesApi from '../../services/moviesApi';
 import MovieListItem from '../../components/MovieListItem/MovieListItem';
 import MovieListFooter from '../../components/MovieListFooter/MovieListFooter';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import colors from '../../utils/colors';
 import {Picker} from '@react-native-picker/picker';
 
@@ -34,27 +33,28 @@ const MainScreen = (props) => {
   };
 
   _openModal = () => {
+    console.log("hi")
     setShowModal(true);
     setMovies([]);
     setCurrentPage(0);
   };
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     props.navigation.setOptions({
+      title: I18n.t(type),
       headerRight: () => (
         <TouchableOpacity
+          style={{paddingLeft:30, paddingVertical:15}}
           onPress={() => {
             _openModal();
           }}>
           <Text style={{color: colors.white}}>{I18n.t('sort')}</Text>
         </TouchableOpacity>
       ),
-      title: I18n.t(type),
     });
   }, [props.navigation, type]);
 
   _getMovies = () => {
-    console.log('type', type);
     setIsLoading(true);
     moviesApi
       .getMovies(type, currentPage + 1)
@@ -63,7 +63,18 @@ const MainScreen = (props) => {
         setCurrentPage(currentPage + 1);
       })
       .catch((err) => {
-        console.log('err');
+        console.log('err', err);
+        Alert.alert(
+          I18n.t("could_not_fetch"),
+          I18n.t("try_later"),
+          [
+            {
+              text: 'Okay',
+              style: 'cancel'
+            }
+          ],
+          {cancelable: false}
+        );
       })
       .finally(() => {
         setIsLoading(false);
@@ -79,7 +90,7 @@ const MainScreen = (props) => {
         flexGrow: 1,
         justifyContent: 'space-between',
       }}>
-      {showModal ? (
+        {showModal ? (
         <View
           style={{
             backgroundColor: 'rgba(0,0,0,.3)',
@@ -106,9 +117,7 @@ const MainScreen = (props) => {
             <Picker
               selectedValue={type}
               itemStyle={styles.option}
-              style={{
-                width: '100%',
-              }}
+              style={styles.picker}
               onValueChange={(itemValue, itemIndex) => setType(itemValue)}>
               <Picker.Item label={I18n.t('popular')} value="popular" />
               <Picker.Item label={I18n.t('top_rated')} value="top_rated" />
@@ -117,7 +126,7 @@ const MainScreen = (props) => {
         </View>
       ) : null}
 
-      <FlatList
+       <FlatList
         ref={(ref) => {
           listRef = ref;
         }}
@@ -148,7 +157,7 @@ const MainScreen = (props) => {
           alignItems: 'center',
         }}
         ListFooterComponent={<MovieListFooter isLoading={isLoading} />}
-      />
+      /> 
     </View>
   );
 };

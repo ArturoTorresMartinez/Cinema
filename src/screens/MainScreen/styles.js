@@ -25,6 +25,10 @@ const themedStyles = styleSheetFactory((theme) => {
     text: {
       color: theme.textColor,
     },
+    picker: {
+      width: '100%',
+      color: theme.textColor
+    }
   };
 });
 

@@ -21,6 +21,7 @@ const App: () => React$Node = () => {
       <SafeAreaProvider>
         <StatusBar
           barStyle="light-content"
+          translucent={true}
           backgroundColor={colors.headerBackground}
         />
         <AppNavigator />
