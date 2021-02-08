@@ -33,7 +33,6 @@ const MainScreen = (props) => {
   };
 
   _openModal = () => {
-    console.log("hi")
     setShowModal(true);
     setMovies([]);
     setCurrentPage(0);
