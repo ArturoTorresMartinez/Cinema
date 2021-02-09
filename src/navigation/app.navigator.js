@@ -12,7 +12,7 @@ class AppNavigator extends React.Component {
     return (
       <Stack.Navigator headerMode="none">
         <Stack.Screen
-          name={'Home'}
+          name={'Login'}
           component={HomeNavigator}
           options={{
             headerShown: false,

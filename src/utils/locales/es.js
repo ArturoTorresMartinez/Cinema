@@ -9,6 +9,12 @@ export default {
   top_rated: 'Mejor Rating',
   close: 'Cerrar',
   sort: 'Ordenar',
-  could_not_fetch:"No se pudieron cargar películas",
-  try_later:"Revisa la conexión y vuelve a intentar."
+  could_not_fetch: 'No se pudieron cargar películas',
+  try_later: 'Revisa la conexión y vuelve a intentar.',
+  welcome: 'Bienvenido a Cinema Infinite',
+  description:
+    'Brindamos una lista de películas populares y mejor calificadas que siempre esta actualizada.',
+  english: 'Inglés',
+  spanish: 'Español',
+  select_language: 'Seleccionar idioma',
 };

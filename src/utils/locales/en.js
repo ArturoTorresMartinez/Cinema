@@ -9,6 +9,12 @@ export default {
   top_rated: 'Top Rated',
   close: 'Close',
   sort: 'Sort',
-  could_not_fetch:"Couldn't fetch movies",
-  try_later:"Check your connectivity and try again later."
+  could_not_fetch: "Couldn't fetch movies",
+  try_later: 'Check your connectivity and try again later.',
+  welcome: 'Welcome to Cinema Infinite',
+  description:
+    'We deliver a list of the most popular and top rated films out there that is always up to date.',
+  english: 'English',
+  spanish: 'Spanish',
+  select_language: 'Select Language',
 };
